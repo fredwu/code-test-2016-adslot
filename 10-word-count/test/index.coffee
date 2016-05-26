@@ -52,6 +52,11 @@ describe '10-word-count', ->
     expected = words: 2, lines: 1, chars: 9
     helper input, expected, done
 
+  it 'should count alphanumeric words', (done) ->
+    input = 'fun fun123 123fun 123'
+    expected = words: 4, lines: 1, chars: 21
+    helper input, expected, done
+
   it 'should count quoted characters with other words', (done) ->
     input = '"this is one word!" funPuzzle'
     expected = words: 3, lines: 1, chars: 29
