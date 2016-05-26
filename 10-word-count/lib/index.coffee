@@ -6,7 +6,11 @@ module.exports = ->
   lines = 1
 
   transform = (chunk, encoding, cb) ->
-    tokens = chunk.split(' ')
+    tokens = if chunk.indexOf('"') >= 0
+      [chunk]
+    else
+      chunk.split(' ')
+
     words = tokens.length
     return cb()
 
