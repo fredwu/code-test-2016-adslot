@@ -1,7 +1,7 @@
 module.exports =
   class WordCruncher
     constructor: (chunk) ->
-      @chunk = chunk
+      @chunk = @removeTrailingEmptyLine(chunk)
 
     words: ->
       tokens = []
@@ -19,3 +19,6 @@ module.exports =
 
     chunkLines: ->
       @chunk.split(/\n/)
+
+    removeTrailingEmptyLine: (chunk) ->
+      chunk.replace(/\s$/gm, '')

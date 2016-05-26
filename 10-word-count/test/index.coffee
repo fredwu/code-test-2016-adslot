@@ -1,4 +1,5 @@
-assert = require 'assert'
+fs        = require 'fs'
+assert    = require 'assert'
 WordCount = require '../lib'
 
 
@@ -64,4 +65,20 @@ describe '10-word-count', ->
   it 'should count lines with camcelCased words', (done) ->
     input = 'fun\nfunPuzzle'
     expected = words: 3, lines: 2
+    helper input, expected, done
+
+describe '10-word-count fixtures', ->
+  it 'should read 1,9,44.txt', (done) ->
+    input = fs.readFileSync "#{__dirname}/fixtures/1,9,44.txt", 'utf8'
+    expected = words: 9, lines: 1
+    helper input, expected, done
+
+  it 'should read 3,7,46.txt', (done) ->
+    input = fs.readFileSync "#{__dirname}/fixtures/3,7,46.txt", 'utf8'
+    expected = words: 7, lines: 3
+    helper input, expected, done
+
+  it 'should read 5,9,40.txt', (done) ->
+    input = fs.readFileSync "#{__dirname}/fixtures/5,9,40.txt", 'utf8'
+    expected = words: 9, lines: 5
     helper input, expected, done
