@@ -8,7 +8,7 @@ module.exports =
       tokens = if @chunk.indexOf('"') >= 0
         [@chunk]
       else
-        @chunk.split(' ')
+        @chunk.split(/ |\w[A-Z]/)
 
       tokens.length
 

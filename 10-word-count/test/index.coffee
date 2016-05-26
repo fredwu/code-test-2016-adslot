@@ -40,3 +40,13 @@ describe '10-word-count', ->
   # !!!!!
   # Make the above tests pass and add more tests!
   # !!!!!
+
+  it 'should count CamelCased words', (done) ->
+    input = 'FunPuzzle'
+    expected = words: 2, lines: 1
+    helper input, expected, done
+
+  it 'should count camelCased words', (done) ->
+    input = 'funPuzzle'
+    expected = words: 2, lines: 1
+    helper input, expected, done
