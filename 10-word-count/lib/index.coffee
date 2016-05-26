@@ -1,4 +1,5 @@
-through2 = require 'through2'
+through2     = require 'through2'
+WordCruncher = require './wordCruncher'
 
 
 module.exports = ->
@@ -6,17 +7,14 @@ module.exports = ->
   lines = 1
 
   transform = (chunk, encoding, cb) ->
-    tokens = if chunk.indexOf('"') >= 0
-      [chunk]
-    else
-      chunk.split(' ')
-
-    words = tokens.length
-    return cb()
+    wordCruncher = new WordCruncher(chunk)
+    words = wordCruncher.words()
+    lines = wordCruncher.lines()
+    cb()
 
   flush = (cb) ->
-    this.push {words, lines}
+    this.push { words, lines }
     this.push null
-    return cb()
+    cb()
 
-  return through2.obj transform, flush
+  through2.obj transform, flush
