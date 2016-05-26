@@ -50,3 +50,8 @@ describe '10-word-count', ->
     input = 'funPuzzle'
     expected = words: 2, lines: 1
     helper input, expected, done
+
+  it 'should count lines', (done) ->
+    input = 'fun\nPuzzle'
+    expected = words: 2, lines: 2
+    helper input, expected, done
