@@ -52,6 +52,31 @@ describe '10-word-count', ->
     expected = words: 2, lines: 1, chars: 9
     helper input, expected, done
 
+  it 'should count quoted characters with other words', (done) ->
+    input = '"this is one word!" funPuzzle'
+    expected = words: 3, lines: 1, chars: 29
+    helper input, expected, done
+
+  it 'should count quoted characters with other words', (done) ->
+    input = 'funPuzzle "this is one word!"'
+    expected = words: 3, lines: 1, chars: 29
+    helper input, expected, done
+
+  it 'should count quoted characters with other words', (done) ->
+    input = 'funPuzzle "this is one word!" funPuzzle'
+    expected = words: 5, lines: 1, chars: 39
+    helper input, expected, done
+
+  it 'should count quoted characters with quoted characters and other words', (done) ->
+    input = 'funPuzzle "this is one word!" "this is one word!" funPuzzle'
+    expected = words: 6, lines: 1, chars: 59
+    helper input, expected, done
+
+  it 'should count quoted characters with quoted characters and other words', (done) ->
+    input = 'funPuzzle "this is one word!" funPuzzle "this is one word!"'
+    expected = words: 6, lines: 1, chars: 59
+    helper input, expected, done
+
   it 'should count lines', (done) ->
     input = 'fun\nPuzzle'
     expected = words: 2, lines: 2, chars: 10

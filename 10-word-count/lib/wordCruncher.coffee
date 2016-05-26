@@ -2,16 +2,13 @@ module.exports =
   class WordCruncher
     constructor: (chunk) ->
       @chunk      = chunk
-      @cleanChunk = @removeTrailingEmptyLine(@chunk)
+      @cleanChunk = @cleanse(@chunk)
 
     words: ->
       tokens = []
 
       for chunkLine in @chunkLines()
-        if chunkLine.indexOf('"') >= 0
-          tokens = [tokens..., chunkLine]
-        else
-          tokens = [tokens..., chunkLine.split(/\s|\w[A-Z]/)...]
+        tokens = [tokens..., chunkLine.split(/\s|\w[A-Z]/)...]
 
       tokens.length
 
@@ -23,6 +20,13 @@ module.exports =
 
     chunkLines: ->
       @cleanChunk.split(/\n/)
+
+    cleanse: (chunk) ->
+      chunk = @removeTrailingEmptyLine(chunk)
+      @replaceQuotedPhrases(chunk)
+
+    replaceQuotedPhrases: (chunk) ->
+      chunk.replace /"\S[^"]+"/g, 'quoted'
 
     removeTrailingEmptyLine: (chunk) ->
       chunk.replace(/\s$/gm, '')
