@@ -55,3 +55,13 @@ describe '10-word-count', ->
     input = 'fun\nPuzzle'
     expected = words: 2, lines: 2
     helper input, expected, done
+
+  it 'should count lines with phrased words', (done) ->
+    input = 'fun\n"fun funPuzzle"'
+    expected = words: 2, lines: 2
+    helper input, expected, done
+
+  it 'should count lines with camcelCased words', (done) ->
+    input = 'fun\nfunPuzzle'
+    expected = words: 3, lines: 2
+    helper input, expected, done

@@ -1,16 +1,21 @@
 module.exports =
   class WordCruncher
     constructor: (chunk) ->
-      console.log 'chunk',chunk
       @chunk = chunk
 
     words: ->
-      tokens = if @chunk.indexOf('"') >= 0
-        [@chunk]
-      else
-        @chunk.split(/\s|\w[A-Z]/)
+      tokens = []
+
+      for chunkLine in @chunkLines()
+        if chunkLine.indexOf('"') >= 0
+          tokens = [tokens..., chunkLine]
+        else
+          tokens = [tokens..., chunkLine.split(/\s|\w[A-Z]/)...]
 
       tokens.length
 
     lines: ->
-      @chunk.split(/\n/).length
+      @chunkLines().length
+
+    chunkLines: ->
+      @chunk.split(/\n/)
